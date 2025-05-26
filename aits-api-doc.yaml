@@ -1,0 +1,108 @@
+openapi: 3.0.0
+info:
+  title: Akademik İntihal Tespit Sistemi API
+  description: Akademik metinlerdeki benzerlik oranlarını analiz eden sistemin API dokümantasyonu.
+  version: "1.0.0"
+servers:
+  - url: http://localhost:8000/api
+    description: Lokal Geliştirme Sunucusu
+paths:
+  /users/register:
+    post:
+      summary: Yeni kullanıcı kaydı oluştur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "201":
+          description: Kullanıcı başarıyla oluşturuldu
+
+  /users/login:
+    post:
+      summary: Kullanıcı girişi yap
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Giriş başarılı, JWT token döner
+
+  /documents/upload:
+    post:
+      summary: Doküman yükle
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: Doküman başarıyla yüklendi
+
+  /documents/compare:
+    post:
+      summary: Yüklenen iki dokümanı karşılaştır ve benzerlik oranını döndür
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                doc1_id:
+                  type: string
+                doc2_id:
+                  type: string
+      responses:
+        "200":
+          description: Karşılaştırma sonucu ve benzerlik oranı
+
+  /documents/{id}/result:
+    get:
+      summary: Belirli bir dokümanın karşılaştırma sonuçlarını getir
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Karşılaştırma detayları
+
+  /documents/history:
+    get:
+      summary: Kullanıcının geçmiş karşılaştırmalarını listele
+      responses:
+        "200":
+          description: Geçmiş karşılaştırmalar başarıyla getirildi
+
+  /auth/logout:
+    post:
+      summary: Kullanıcının oturumunu sonlandır
+      responses:
+        "200":
+          description: Başarıyla çıkış yapıldı
