@@ -1,0 +1,85 @@
+/* Genel vücut ve sayfa ayarları */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5); /* Parlak mavi arka plan */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Konteyner kutusu */
+  .container {
+    background-color: white;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    width: 500px;
+    box-sizing: border-box;
+    /* Kenarlarda keskin ve düzgün görünmesi için */
+    border: 1px solid #ddd;
+  }
+  
+  /* Başlık */
+  h2 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 30px;
+  }
+  
+  /* Form elemanları */
+  label {
+    display: block;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    border: 1.8px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.25s ease-in-out;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #0056b3;
+    outline: none;
+  }
+  
+  /* Buton */
+  button {
+    width: 100%;
+    padding: 14px 0;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #003d80;
+  }
+  
+  /* Sayfa bazlı ufak farklılıklar */
+  body.login-page .container {
+    width: 360px;
+  }
+  
+  body.register-page .container {
+    width: 400px; /* register form biraz daha geniş olabilir */
+  }
+  
