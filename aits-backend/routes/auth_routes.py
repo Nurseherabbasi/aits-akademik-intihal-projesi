@@ -1,14 +1,16 @@
 from flask import Blueprint, request, jsonify
+from controllers.auth_controller import login_user, register_user
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    username = data.get("username")
-    password = data.get("password")
-    
-    if username == "testuser" and password == "123456":
-        return jsonify({"message": "Login successful!"}), 200
-    else:
-        return jsonify({"message": "Invalid credentials"}), 401
+    result, status = login_user(data)
+    return jsonify(result), status
+
+@auth_bp.route('/register', methods=['POST'])
+def register():
+    data = request.get_json()
+    result, status = register_user(data)
+    return jsonify(result), status
