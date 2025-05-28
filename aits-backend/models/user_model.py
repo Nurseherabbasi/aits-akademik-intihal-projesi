@@ -1,0 +1,7 @@
+users_db = {
+    "testuser": {
+        "username": "testuser",
+        "password": "123456"
+    }
+}
+
