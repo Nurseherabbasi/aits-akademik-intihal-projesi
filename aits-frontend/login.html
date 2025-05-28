@@ -9,7 +9,7 @@
 <body class="login-page">
   <div class="container">
     <h2>Giriş Yap</h2>
-    <form>
+    <form id="loginForm" onsubmit="return handleLogin(event)">
       <label for="username">Kullanıcı Adı</label>
       <input
         type="text"
@@ -30,9 +30,6 @@
 
       <button type="submit">Giriş Yap</button>
     </form>
-    <div class="login-footer">
-        Hesabınız yok mu? <a href="#">Kayıt Ol</a>
-      </div>
   </div>
   <script src="login-validation.js"></script>
 </body>
