@@ -9,7 +9,7 @@
 <body class="register-page">
   <div class="container">
     <h2>Kayıt Ol</h2>
-    <form id="registerForm" onsubmit="return validateForm(event)">
+    <form id="registerForm">
       <label for="username">Kullanıcı Adı</label>
       <input
         type="text"
@@ -49,6 +49,8 @@
       <button type="submit">Kayıt Ol</button>
     </form>
   </div>
+
+  <!-- Form doğrulama ve API isteği -->
   <script src="register-validation.js"></script>
 </body>
 </html>

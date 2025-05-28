@@ -1,33 +1,49 @@
-function validateForm(event) {
-  event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector("form");
+  const usernameInput = document.getElementById("username");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const confirmPasswordInput = document.getElementById("confirm-password");
 
-  const username = document.getElementById("username").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const confirmPassword = document.getElementById("confirm-password").value.trim();
+  form.addEventListener("submit", function (event) {
+    let isValid = true;
+    let errorMessage = "";
 
-  if (username === "") {
-    alert("Kullanıcı adı boş olamaz.");
-    return false;
-  }
+    // Kullanıcı adı boş mu?
+    if (usernameInput.value.trim() === "") {
+      isValid = false;
+      errorMessage += "Kullanıcı adı boş olamaz.\n";
+    }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    alert("Geçerli bir e-posta adresi girin.");
-    return false;
-  }
+    // E-posta doğrulama
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailInput.value.trim())) {
+      isValid = false;
+      errorMessage += "Geçerli bir e-posta adresi girin.\n";
+    }
 
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  if (!passwordRegex.test(password)) {
-    alert("Şifre en az 8 karakter olmalı ve hem harf hem sayı içermelidir.");
-    return false;
-  }
+    // Şifre karmaşıklığı kontrolü
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    if (!passwordRegex.test(passwordInput.value)) {
+      isValid = false;
+      errorMessage += "Şifre en az 8 karakter olmalı ve hem harf hem sayı içermelidir.\n";
+    }
 
-  if (password !== confirmPassword) {
-    alert("Şifreler eşleşmiyor.");
-    return false;
-  }
+    // Şifre eşleşiyor mu?
+    if (passwordInput.value !== confirmPasswordInput.value) {
+      isValid = false;
+      errorMessage += "Şifreler eşleşmiyor.\n";
+    }
 
-  alert("Kayıt başarılı!");
-  return true;
-}
+    if (!isValid) {
+      event.preventDefault();
+      alert(errorMessage);
+    } else {
+      event.preventDefault(); // Formu backend'e göndermek için engelle
+      alert("Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz...");
+      setTimeout(() => {
+        window.location.href = "login.html"; // login sayfasına yönlendirme
+      }, 1000);
+    }
+  });
+});
